@@ -1,7 +1,11 @@
 import {useEffect, useState} from 'react'
+
 import Navbar from './Components/Navbar'
+
 import CategoryTabs from './Components/CategoryTabs'
+
 import DishItem from './Components/DishItem'
+
 import './App.css'
 
 const API_URL =
@@ -9,55 +13,62 @@ const API_URL =
 
 const App = () => {
   const [categories, setCategories] = useState([])
-  const [activeCategoryId, setActiveCategoryId] = useState(null)
+
+  const [activeCategoryName, setActiveCategoryName] = useState('')
+
   const [cartItems, setCartItems] = useState({})
 
-  const fetchMenu = async () => {
-    const res = await fetch(API_URL)
-    const json = await res.json()
-
-    if (Array.isArray(json) && json.length > 0 && json[0].table_menu_list) {
-      const menu = json[0].table_menu_list
-      setCategories(menu)
-      setActiveCategoryId(menu[0].menu_category_id)
-    } else {
-      console.error('Unexpected API response:', json)
-    }
-  }
-
   useEffect(() => {
+    const fetchMenu = async () => {
+      const response = await fetch(API_URL)
+
+      const data = await response.json()
+
+      const menuList = data[0]?.table_menu_list || []
+
+      setCategories(menuList)
+
+      setActiveCategoryName(menuList[0]?.menu_category || '')
+    }
+
     fetchMenu()
   }, [])
 
-  const handleTabClick = id => setActiveCategoryId(id)
+  const handleTabClick = name => setActiveCategoryName(name)
 
-  const handleIncrement = dishId => {
-    setCartItems(prev => ({...prev, [dishId]: (prev[dishId] || 0) + 1}))
+  const handleIncrement = id => {
+    setCartItems(prev => ({...prev, [id]: (prev[id] || 0) + 1}))
   }
 
-  const handleDecrement = dishId => {
+  const handleDecrement = id => {
     setCartItems(prev => {
       const newPrev = {...prev}
-      if (newPrev[dishId] > 1) newPrev[dishId] -= 1
-      else delete newPrev[dishId]
+
+      if (newPrev[id] > 1) newPrev[id] -= 1
+      else delete newPrev[id]
+
       return newPrev
     })
   }
 
   const activeCategory = categories.find(
-    cat => cat.menu_category_id === activeCategoryId,
+    cat => cat.menu_category === activeCategoryName,
   )
+
   const activeDishes = activeCategory?.category_dishes || []
+
   const totalCount = Object.values(cartItems).reduce((sum, v) => sum + v, 0)
 
   return (
     <div className="app-container">
       <Navbar cartCount={totalCount} />
+
       <CategoryTabs
         categories={categories}
-        selectedCategoryId={activeCategoryId}
+        selectedCategoryName={activeCategoryName}
         onTabClick={handleTabClick}
       />
+
       <div className="dish-list">
         {activeDishes.length > 0 ? (
           activeDishes.map(dish => (
