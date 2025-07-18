@@ -1,15 +1,14 @@
 import './index.css'
 
-const CategoryTabs = ({categories, selectedCategoryName, onTabClick}) => (
-  <div className="category-tabs-container">
+const CategoryTabs = ({categories, selectedCategory, onTabClick}) => (
+  <div className="tabs-container">
     {categories.map(category => (
       <button
-        type="button"
         key={category.menu_category_id}
+        type="button"
         className={`tab-button ${
-          selectedCategoryName === category.menu_category ? 'active-tab' : ''
+          selectedCategory === category.menu_category ? 'active' : ''
         }`}
-        aria-label={category.menu_category}
         onClick={() => onTabClick(category.menu_category)}
       >
         {category.menu_category}

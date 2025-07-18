@@ -1,0 +1,42 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.cart-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.icon-wrapper {
+  position: relative;
+}
+
+.cart-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+}

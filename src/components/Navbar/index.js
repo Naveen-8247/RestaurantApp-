@@ -2,20 +2,17 @@ import './index.css'
 
 const Navbar = ({cartCount}) => (
   <div className="navbar">
-    <h2 className="logo">UNI Resto Cafe</h2>
-
+    <h1 className="logo">UNI Resto Cafe</h1>
     <div className="cart-container">
-      <div className="order-section">
-        <h3 className="text">My Orders</h3>
-
+      <p className="my-orders">My Orders</p>
+      <div className="icon-wrapper">
         <img
           src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
           alt="cart"
           className="cart-icon"
         />
+        <span className="cart-count">{cartCount}</span>
       </div>
-
-      <p className="cart-count">{cartCount}</p>
     </div>
   </div>
 )
