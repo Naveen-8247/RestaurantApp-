@@ -3,29 +3,60 @@
   justify-content: space-between;
   align-items: flex-start;
   background-color: #ffffff;
+  border-radius: 10px;
   padding: 16px;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  flex-wrap: wrap;
+  margin: 16px 0;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
 }
 
 .dish-details {
-  flex: 1;
-  margin-right: 16px;
-  min-width: 220px;
+  max-width: 70%;
 }
 
-.dish-details h1 {
-  font-size: 20px;
-  color: #222;
-  margin-bottom: 8px;
+.dish-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-.dish-details p {
+.quantity-controller {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.quantity-controller button {
+  width: 32px;
+  height: 32px;
+  background-color: #27ae60;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quantity-controller p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.add-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
   font-size: 14px;
-  color: #444;
-  margin: 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-btn:hover {
+  background-color: #2980b9;
 }
 
 .not-available {
@@ -34,61 +65,20 @@
 }
 
 .customizable {
-  color: #e69500;
-  font-weight: 500;
+  color: #f39c12;
+  font-style: italic;
 }
 
-.quantity-controller {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.quantity-controller button {
-  background-color: #e53935;
-  color: white;
-  font-size: 18px;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin: 0 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.quantity-controller button:hover {
-  background-color: #c62828;
-}
-
-.quantity-controller p {
-  font-size: 16px;
-  font-weight: bold;
-  min-width: 20px;
-  text-align: center;
-}
-
-.dish-image {
-  width: 120px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-@media screen and (max-width: 600px) {
+/* Responsive */
+@media screen and (max-width: 768px) {
   .dish-card {
     flex-direction: column;
-    align-items: center;
-  }
-
-  .dish-details {
-    margin-right: 0;
-    text-align: center;
+    align-items: flex-start;
   }
 
   .dish-image {
+    width: 100%;
+    height: auto;
     margin-top: 12px;
-    width: 90%;
-    max-width: 280px;
   }
 }

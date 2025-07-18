@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import './index.css'
 
 const DishItem = ({dish, quantity, onIncrement, onDecrement}) => {
@@ -13,8 +12,10 @@ const DishItem = ({dish, quantity, onIncrement, onDecrement}) => {
     addonCat = [],
   } = dish
 
+  const showControls = quantity > 0
+
   return (
-    <div className="dish-card">
+    <div className="dish-card" data-testid="dish-item">
       <div className="dish-details">
         <h1>{dishName}</h1>
         <p>{`${dishCurrency} ${dishPrice}`}</p>
@@ -22,21 +23,28 @@ const DishItem = ({dish, quantity, onIncrement, onDecrement}) => {
         <p>{`${dishCalories} calories`}</p>
 
         {!dishAvailability && <p className="not-available">Not available</p>}
-
         {addonCat.length > 0 && (
           <p className="customizable">Customizations available</p>
         )}
 
         {dishAvailability && (
-          <div className="quantity-controller">
-            <button type="button" onClick={onDecrement}>
-              -
-            </button>
-            <p>{quantity}</p>
-            <button type="button" onClick={onIncrement}>
-              +
-            </button>
-          </div>
+          <>
+            {showControls ? (
+              <div className="quantity-controller">
+                <button type="button" onClick={onDecrement}>
+                  -
+                </button>
+                <p>{quantity}</p>
+                <button type="button" onClick={onIncrement}>
+                  +
+                </button>
+              </div>
+            ) : (
+              <button type="button" className="add-btn" onClick={onIncrement}>
+                ADD TO CART
+              </button>
+            )}
+          </>
         )}
       </div>
 
