@@ -7,10 +7,8 @@
   white-space: nowrap;
   padding: 12px 8px;
   background-color: #fff;
-  scrollbar-width: none; 
-
-.tabs-container::-webkit-scrollbar {
-  display: none;
+  scrollbar-width: none;
+}
 
 .tab-button {
   background-color: transparent;
